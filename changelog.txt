@@ -1,0 +1,4 @@
+0.2.0 (01.04.2017)
+ - extended version
+0.1.0 (01.04.2017)
+ - initial version
