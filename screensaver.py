@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-#    Copyright (C) 2017 M.King
+#    Copyright (C) 2017 M.Koenig
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ import random
 import xbmcaddon
 import xbmcgui
 import xbmc
-import urllib, time, json, os, codecs
+import urllib, time, json, os, codecs, time, datetime
 
 addon = xbmcaddon.Addon()
 addon_name = addon.getAddonInfo('name')
@@ -33,6 +33,9 @@ addon_bing = os.path.join(addon_temp, 'bing')
 
 addon_use_files = addon.getSetting('use_files')
 addon_clear_files = addon.getSetting('delete_files')
+
+addon_show_clock = addon.getSetting('show_clock')
+addon_clock_24h = addon.getSetting('use_24h')
 
 class Screensaver(xbmcgui.WindowXMLDialog):
 
@@ -55,6 +58,11 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         self.title_control = self.getControl(30004)
         self.description_control = self.getControl(30005)
         self.next_picture_control = self.getControl(30006)
+        
+        self.clock1_control = self.getControl(30010)
+        self.clock2_control = self.getControl(30011)
+        self.clockPoints_control = self.getControl(30012)
+        self.clockAMPM_control = self.getControl(30013)
 
         self.picture_duration = (
             int(addon.getSetting('picture_duration')) * 1000
@@ -99,8 +107,10 @@ class Screensaver(xbmcgui.WindowXMLDialog):
                         self.preload_next_photo(next_photo)            
                     for i in xrange(self.picture_duration / 500):
                         #self.log('check abort %d' % (i + 1))
+                        
+                        self.setClock()
                         if self.abort_requested:
-                            self.log('slideshow abort_requested')
+                            #self.log('slideshow abort_requested')
                             self.exit()
                             return
                         xbmc.sleep(500)
@@ -128,25 +138,34 @@ class Screensaver(xbmcgui.WindowXMLDialog):
                for i, photo in enumerate(list):
                    self.source_control.setLabel('Microsoft Bing')
                    
-                   fileDate = photo.replace('.jpg','')
-                   
-		   self.title_control.setLabel(fileDate)
-		   
-		   #decription
-		   fileName = os.path.join(addon_bing, fileDate)
-		   fileName = fileName + '.txt'
-		   f2 = codecs.open(fileName,'r' ,'utf-8')
-		   self.description_control.setText(f2.read())
+                   fileDate = photo.replace('.jpg','')                  
+                   self.title_control.setLabel(fileDate)
+                   #self.log('title ' + fileDate)
+
+                   #decription
+                   fileName = os.path.join(addon_bing, fileDate)
+                   fileName = fileName + '.txt'
+                   f2 = codecs.open(fileName,'r' ,'utf-8')
+                   self.description_control.setText(f2.read())
                    f2.close()
                    
                    # picture
                    fileName = os.path.join(addon_bing, photo)
                    self.picture_control.setImage(fileName)
                    
+                   fileDate = photo.replace('.jpg','')                  
+                   self.title_control.setLabel(fileDate)
+                   #self.log('title ' + fileDate)
+                   
+                   self.setClock()
+                  
+                   
                    for i in xrange(self.picture_duration / 500):
 		       #self.log('check abort %d' % (i + 1))
+		       
+		       self.setClock()
 		       if self.abort_requested:
-		           self.log('slideshow abort_requested')
+		           #self.log('slideshow abort_requested')
 		           self.exit()
 		           return
                        xbmc.sleep(500)
@@ -160,11 +179,13 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         #self.log('photo: %s' % picture_url)
         
         self.source_control.setLabel(photo['source'])
-        self.title_control.setLabel(photo['startdate'])
         self.description_control.setText(photo['copyright'])
         
         file = photo['startdate'] + '.jpg'
         desc = photo['startdate'] + '.txt'
+
+        fileDate = file.replace('.jpg','')                  
+        self.title_control.setLabel(fileDate)
 
         fileName = os.path.join(addon_bing, file)
         fileDesc = os.path.join(addon_bing, desc)
@@ -172,9 +193,14 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         #can we use cache ?
         if(not os.path.exists(fileName)):
             # no cache 
-            self.log('load without cache ' + file)
+            #self.log('load without cache ' + file)
             self.picture_control.setImage(picture_url)
-        
+            
+            fileDate = fileName.replace('.jpg','')                  
+            self.title_control.setLabel(fileDate)
+            
+            self.setClock()
+            
             # save to cache
             f1 = urllib.URLopener()
             f1.retrieve(picture_url, fileName)
@@ -187,12 +213,18 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         else:
             # use cache 
 
-            self.log('load use cache ' + file)
+            #self.log('load use cache ' + file)
             self.picture_control.setImage(fileName)
+            
+            fileDate = fileName.replace('.jpg','')                  
+            self.title_control.setLabel(fileDate)
+            
+            self.setClock()
             
             f2 = codecs.open(fileDesc,'r' ,'utf-8')
             self.description_control.setText(f2.read())
             f2.close()
+            
        
     def preload_next_photo(self, photo):
         picture_url = 'http://www.bing.com' + photo['url']
@@ -203,7 +235,7 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         
         if(os.path.exists(fileName)):
             picture_url = fileName
-            self.log('preload use cache ' + file)
+            #self.log('preload use cache ' + file)
         
         self.next_picture_control.setImage(picture_url)
 
@@ -218,7 +250,7 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         
         if(not os.path.exists(fileName)):
             # no cache 
-            self.log('load photo ' + file)
+            #self.log('load photo ' + file)
                
             # save to cache
             f1 = urllib.URLopener()
@@ -248,12 +280,28 @@ class Screensaver(xbmcgui.WindowXMLDialog):
     def exit(self):
         self.abort_requested = True
         self.exit_monitor = None
-        self.log('exit')
+        #self.log('exit')
         self.close()
 
     def log(self, msg):
         xbmc.log(u'Bing Pictures Screensaver: %s' % msg)
+        
+    def setClock(self):
+        if(addon_show_clock == 'true'):
+            if(addon_clock_24h == 'true'):
+                self.clock1_control.setImage(time.strftime("%H") + '.png')
+                self.clock2_control.setImage(time.strftime("%M") + '.png')
+                self.clockPoints_control.setImage('points.png')
+            else:
+                self.clock1_control.setImage(time.strftime("%I") + '.png')
+                self.clock2_control.setImage(time.strftime("%M") + '.png')
+                self.clockPoints_control.setImage('points.png')
 
+                now = datetime.datetime.now()
+                if(now.hour >= 12):
+                    self.clockAMPM_control.setImage('pm.png')
+                else:
+                    self.clockAMPM_control.setImage('am.png')
 
 if __name__ == '__main__':
     screensaver = Screensaver(

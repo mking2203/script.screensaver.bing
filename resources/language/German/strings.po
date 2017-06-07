@@ -33,3 +33,11 @@ msgstr "Benutze zusätzliche Dateien"
 msgctxt "#32113"
 msgid "Delete cache"
 msgstr "Lösche Cache"
+
+msgctxt "#32114"
+msgid "Show clock"
+msgstr "Zeige Uhrzeit"
+
+msgctxt "#32115"
+msgid "Use 24h clock"
+msgstr "Benutze 24h Uhr"

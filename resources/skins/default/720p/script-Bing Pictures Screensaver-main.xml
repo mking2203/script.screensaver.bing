@@ -12,13 +12,13 @@
         <control type="image" id="30001">
             <description>The Bing picture</description>
             <posx>0</posx>
-            <posy>60</posy>
+            <posy>0</posy>
             <width>1280</width>
-            <height>636</height>
+            <height>720</height>
             <fadetime>1000</fadetime>
-            <aspectratio>keep</aspectratio>
+            <aspectratio>scale</aspectratio>
         </control>
-        <control type="image">
+        <!--control type="image">
             <description>Background for Header</description>
             <posx>0</posx>
             <posy>0</posy>
@@ -33,55 +33,84 @@
             <width>1280</width>
             <height>121</height>
             <texture border="0,0,20,0">FooterBack.png</texture>
+        </control-->
+        <control type="image">
+            <description>Bing Logo</description>
+            <posx>1100</posx>
+            <posy>30</posy>
+            <width>120</width>
+            <height>50</height>
+            <texture>Bing_logo.png</texture>
+            <colordiffuse>77FFFFFF</colordiffuse>
+            <aspectratio>keep</aspectratio>
+        </control>
+        <control type="image">
+            <description>Background for Footer</description>
+            <posx>0</posx>
+            <posy>600</posy>
+            <width>1280</width>
+            <height>121</height>
+            <texture border="0,0,0,0">gradient.png</texture>
+            <colordiffuse>82000000</colordiffuse>
+            <aspectratio>stretch</aspectratio>
         </control>
         <control type="label">
             <description>Label Screensaver</description>
-            <posx>1260</posx>
-            <posy>15</posy>
+            <posx>50</posx>
+            <posy>675</posy>
             <width>320</width>
             <height>20</height>
-            <align>right</align>
+            <align>left</align>
             <aligny>center</aligny>
             <label>Bing Pictures Screensaver</label>
             <textcolor>FFDDDDDD</textcolor>
             <font>font13</font>
         </control>
-        <control type="label" id="30003">
-            <description>Label for source title</description>
-            <posx>20</posx>
-            <posy>15</posy>
-            <width>400</width>
-            <height>20</height>
-            <align>left</align>
-            <aligny>center</aligny>
-            <textcolor>FFDDDDDD</textcolor>
-            <font>font13</font>
-        </control>
-        <control type="label" id="30004">
-            <description>Label for picture title</description>
-            <posx>230</posx>
-            <posy>15</posy>
-            <width>820</width>
-            <height>20</height>
-            <align>center</align>
-            <aligny>center</aligny>
-            <textcolor>FF4a92f7</textcolor>
-            <font>font13</font>
-            <scroll>true</scroll>
-        </control>
-        <control type="textbox" id="30005">
-            <description>Label for picture description</description>
-            <posx>20</posx>
-            <posy>623</posy>
-            <width>1230</width>
-            <height>90</height>
-            <font>font28</font>
-            <align>left</align>
-            <aligny>top</aligny>
-            <autoscroll delay="10000" time="2500" repeat="10000"></autoscroll>
-            <wrapmultiline>true</wrapmultiline>
-            <textcolor>FFDDDDDD</textcolor>
-        </control>
+
+        <control type="grouplist">
+			<right>50</right>
+			<top>625</top>
+			<width>975</width>
+			<height>90</height>
+			<itemgap>6</itemgap>
+			<align>right</align>
+			<orientation>horizontal</orientation>
+			<visible>true</visible>
+			
+			<control type="label" id="30003">
+				<description>Label for source title</description>
+				<width>auto</width>
+				<height>20</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<textcolor>FFDDDDDD</textcolor>
+				<font>font13</font>
+				<visible>false</visible>
+			</control>
+			<control type="label" id="30004">
+				<description>Label for picture title</description>
+				<width>auto</width>
+				<height>20</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<textcolor>FF4a92f7</textcolor>
+				<font>font13</font>
+				<scroll>true</scroll>
+				<visible>false</visible>
+			</control>
+			<control type="textbox" id="30005">
+				<description>Label for picture description</description>
+				<width>600</width>
+				<height>90</height>
+				<font>font28</font>
+				<align>right</align>
+				<aligny>top</aligny>
+				<autoscroll delay="10000" time="2500" repeat="10000"></autoscroll>
+				<wrapmultiline>true</wrapmultiline>
+				<textcolor>FFDDDDDD</textcolor>
+			</control>
+		</control>
+		
         <control type="image" id="30006">
             <description>The next bing picture (for preloading)</description>
             <posx>1280</posx>
@@ -90,5 +119,44 @@
             <height>9</height>
             <aspectratio>keep</aspectratio>
         </control>
+        
+        <control type="image" id="30010">
+             <description>Clock1</description>
+             <posx>50</posx>
+             <posy>450</posy>
+             <width>200</width>
+             <height>150</height>
+             <texture border="0,0,0,0"></texture>
+             <colordiffuse>82FFFFFF</colordiffuse>
+        </control>
+        <control type="image" id="30012">
+             <description>Points</description>
+             <posx>250</posx>
+             <posy>450</posy>
+             <width>30</width>
+             <height>150</height>
+             <texture border="0,0,0,0"></texture>
+             <colordiffuse>82FFFFFF</colordiffuse>
+        </control>
+        <control type="image" id="30011">
+             <description>Clock2</description>
+             <posx>280</posx>
+             <posy>450</posy>
+             <width>200</width>
+             <height>150</height>
+             <texture border="0,0,0,0"></texture>
+             <colordiffuse>82FFFFFF</colordiffuse>
+        </control>
+        <control type="image" id="30013">
+             <description>AMPM</description>
+             <posx>485</posx>
+             <posy>514</posy>
+             <width>100</width>
+             <height>75</height>
+             <texture border="0,0,0,0"></texture>
+             <colordiffuse>82FFFFFF</colordiffuse>
+             <aspectratio>scale</aspectratio>
+        </control>
+        
     </controls>
 </window>
