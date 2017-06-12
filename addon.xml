@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.screensaver.bing" name="Bing Pictures Screensaver" version="0.2.1" provider-name="M. King">
+<addon id="script.screensaver.bing" name="Bing Pictures Screensaver" version="0.3.1" provider-name="M. Koenig">
     <requires>
-        <import addon="xbmc.python" version="2.7.0"/>
+        <import addon="xbmc.python" version="2.14.0"/>
     </requires>
     <extension point="xbmc.ui.screensaver" library="screensaver.py" />
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
         <language/>
         <website></website>
-        <source></source>
-        <forum></forum>
-        <email></email>
+        <source>https://github.com/mking2203/script.screensaver.bing</source>
+        <forum>https://github.com/mking2203/script.screensaver.bing</forum>
+        <email>mark.koenig@kleiner-schelm.de</email>
         
         <summary lang="de">Bing Bildschirmschoner</summary>
         <summary lang="en">Bing Screensaver</summary>
@@ -18,5 +18,12 @@
         <description lang="de">Bing Wallpaper Galerie - Die Wallpaper Gallery liefert tägliche Bilder für verschiedene Länder.</description>
         <description lang="en">Bing Wallpaper Galerie - Provides Bing daily wallpaper images gallery for several countries.</description>
       
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+            <screenshot>resources/screenshot000.jpg</screenshot>
+            <screenshot>resources/screenshot001.jpg</screenshot>
+            <screenshot>resources/screenshot002.jpg</screenshot>
+        </assets>
     </extension>
 </addon>
