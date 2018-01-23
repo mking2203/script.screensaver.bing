@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.screensaver.bing" name="Bing Pictures Screensaver" version="0.4.0" provider-name="Mark Koenig">
+<addon id="script.screensaver.bing" name="Bing Pictures Screensaver" version="0.4.1" provider-name="Mark König">
     <requires>
         <import addon="xbmc.python" version="2.14.0"/>
     </requires>

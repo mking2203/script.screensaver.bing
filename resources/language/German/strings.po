@@ -27,8 +27,8 @@ msgid "Website (location)"
 msgstr "Website (Land)"
 
 msgctxt "#32112"
-msgid "Use additional cached files"
-msgstr "Benutze zusätzliche Dateien"
+msgid "Save all pictures"
+msgstr "Speichere alle Bilder"
 
 msgctxt "#32113"
 msgid "Delete cache"
@@ -41,3 +41,7 @@ msgstr "Zeige Uhrzeit"
 msgctxt "#32115"
 msgid "Use 24h clock"
 msgstr "Benutze 24h Uhr"
+
+msgctxt "#32116"
+msgid "Show BING icon"
+msgstr "Zeige BING Logo"

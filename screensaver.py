@@ -37,6 +37,8 @@ addon_clear_files = addon.getSetting('delete_files')
 addon_show_clock = addon.getSetting('show_clock')
 addon_clock_24h = addon.getSetting('use_24h')
 
+addon_useBing = addon.getSetting('use_bing')
+
 class Screensaver(xbmcgui.WindowXMLDialog):
 
     class ExitMonitor(xbmc.Monitor):
@@ -63,6 +65,10 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         self.clock2_control = self.getControl(30011)
         self.clockPoints_control = self.getControl(30012)
         self.clockAMPM_control = self.getControl(30013)
+        self.clockShadow24_control = self.getControl(30014)
+        self.clockShadow_control = self.getControl(30015)
+ 
+        self.bingLogo_control = self.getControl(30020)
 
         self.picture_duration = (
             int(addon.getSetting('picture_duration')) * 1000
@@ -75,20 +81,29 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         if(addon_clear_files == 'true'):
             self.deleteCache()
             addon.setSetting('delete_files', 'false')
+            
+        if(addon_show_clock == 'true'):
+            if(addon_clock_24h == 'true'):
+                self.clockShadow24_control.setImage('clockback.png')
+            else:
+                self.clockShadow_control.setImage('clockback.png')
+
+        if(addon_useBing == 'true'):
+            self.bingLogo_control.setImage('Bing_logo.png')
 
         self.slideshow()
 
     def slideshow(self):
-    
+
         while not self.abort_requested:
 
             opt = ['en-AU','pt-BR','en-CA','zh-CN','de-DE','fr-FR','ja-JP','en-NZ','en-US','en-UK']
             # Australia ,Brazil, Canada, China, Germnay, France, Japan, Netherland, United States, United Kingdom
-                
+
             if(addon_use_files == 'false'):
-            
+
                 # normal mode ( actual 8 pictures)
-                
+
                 location = opt[self.picture_select]
                 days = str(8)
                 tomorrow = str(-1) # str(int(time.time() + (24*3600)))
@@ -96,15 +111,15 @@ class Screensaver(xbmcgui.WindowXMLDialog):
                 url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=" + tomorrow + "&n=" + str(days) + "&mkt=" + location;
 
                 json_object = json.load(urllib.urlopen(url))
-                
+
                 for i, photo in enumerate(json_object['images']):
-            
+
                     photo['source'] = 'Microsoft Bing'
                     self.set_photo(photo)
-                
+
                     if i + 1 < len(json_object):
                         next_photo = json_object['images'][i + 1]
-                        self.preload_next_photo(next_photo)            
+                        self.preload_next_photo(next_photo)
                     for i in xrange(self.picture_duration / 500):
                         #self.log('check abort %d' % (i + 1))
                         
@@ -115,9 +130,9 @@ class Screensaver(xbmcgui.WindowXMLDialog):
                             return
                         xbmc.sleep(500)
             else:
-                
+
                # extended mode use cached files and fetch online
-               
+
                location = opt[self.picture_select]
                days = str(8)
                tomorrow = str(-1) # str(int(time.time() + (24*3600)))
@@ -135,13 +150,13 @@ class Screensaver(xbmcgui.WindowXMLDialog):
                list = self.getDir(addon_bing)
                
                if not self.started:
-	           self.loader_control.setVisible(False)
+                   self.loader_control.setVisible(False)
                    self.started = True
                             
                for i, photo in enumerate(list):
                    self.source_control.setLabel('Microsoft Bing')
                    
-                   fileDate = photo.replace('.jpg','')                  
+                   fileDate = photo.replace('.jpg','')
                    self.title_control.setLabel(fileDate)
 
                    #decription
@@ -150,42 +165,40 @@ class Screensaver(xbmcgui.WindowXMLDialog):
                    f2 = codecs.open(fileName,'r' ,'utf-8')
                    self.description_control.setText(f2.read())
                    f2.close()
-                   
+
                    # picture
                    fileName = os.path.join(addon_bing, photo)
                    self.picture_control.setImage(fileName)
-                   
-                   fileDate = photo.replace('.jpg','')                  
+
+                   fileDate = photo.replace('.jpg','')
                    self.title_control.setLabel(fileDate)
-                   
+
                    self.setClock()
-                  
-                   
+
                    for i in xrange(self.picture_duration / 500):
-		       #self.log('check abort %d' % (i + 1))
-		       
-		       self.setClock()
-		       if self.abort_requested:
-		           #self.log('slideshow abort_requested')
-		           self.exit()
-		           return
+                       #self.log('check abort %d' % (i + 1))
+                       self.setClock()
+                       if self.abort_requested:
+                           #self.log('slideshow abort_requested')
+                           self.exit()
+                           return
                        xbmc.sleep(500)
                
     def set_photo(self, photo):
         if not self.started:
             self.loader_control.setVisible(False)
             self.started = True
-            
+
         picture_url = 'http://www.bing.com' + photo['url']
         #self.log('photo: %s' % picture_url)
-        
+
         self.source_control.setLabel(photo['source'])
         self.description_control.setText(photo['copyright'])
-        
+
         file = photo['startdate'] + '.jpg'
         desc = photo['startdate'] + '.txt'
 
-        fileDate = file.replace('.jpg','')                  
+        fileDate = file.replace('.jpg','')
         self.title_control.setLabel(fileDate)
 
         fileName = os.path.join(addon_bing, file)
@@ -195,12 +208,12 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         if(not os.path.exists(fileName)):
             # no cache 
             self.picture_control.setImage(picture_url)
-            
-            fileDate = fileName.replace('.jpg','')                  
+
+            fileDate = fileName.replace('.jpg','')
             self.title_control.setLabel(fileDate)
-            
+
             self.setClock()
-            
+
             # save to cache
             f1 = urllib.URLopener()
             f1.retrieve(picture_url, fileName)
@@ -214,7 +227,7 @@ class Screensaver(xbmcgui.WindowXMLDialog):
             # use cache 
             self.picture_control.setImage(fileName)
             
-            fileDate = fileName.replace('.jpg','')                  
+            fileDate = fileName.replace('.jpg','')
             self.title_control.setLabel(fileDate)
             
             self.setClock()
@@ -241,9 +254,9 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         picture_url = 'http://www.bing.com' + photo['url']
         
         file = photo['startdate'] + '.jpg'
-	desc = photo['startdate'] + '.txt'
-	
-	fileName = os.path.join(addon_bing, file)
+        desc = photo['startdate'] + '.txt'
+
+        fileName = os.path.join(addon_bing, file)
         fileDesc = os.path.join(addon_bing, desc)
         
         if(not os.path.exists(fileName)):
@@ -252,7 +265,7 @@ class Screensaver(xbmcgui.WindowXMLDialog):
             f1 = urllib.URLopener()
             f1.retrieve(picture_url, fileName)
             f1.close()
-       
+
             f2 = codecs.open(fileDesc,'w' ,'utf-8')
             f2.write(photo['copyright'])
             f2.close()

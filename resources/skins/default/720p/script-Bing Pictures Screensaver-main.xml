@@ -18,40 +18,25 @@
             <fadetime>1000</fadetime>
             <aspectratio>scale</aspectratio>
         </control>
-        <!--control type="image">
-            <description>Background for Header</description>
-            <posx>0</posx>
-            <posy>0</posy>
-            <width>1280</width>
-            <height>64</height>
-            <texture border="0,0,20,0">HeaderBack.png</texture>
-        </control>
-        <control type="image">
-            <description>Background for Footer</description>
-            <posx>0</posx>
-            <posy>600</posy>
-            <width>1280</width>
-            <height>121</height>
-            <texture border="0,0,20,0">FooterBack.png</texture>
-        </control-->
-        <control type="image">
+      
+        <control type="image" id="30020">
             <description>Bing Logo</description>
             <posx>1100</posx>
             <posy>30</posy>
             <width>120</width>
             <height>50</height>
-            <texture>Bing_logo.png</texture>
+            <texture></texture>
             <colordiffuse>77FFFFFF</colordiffuse>
             <aspectratio>keep</aspectratio>
         </control>
         <control type="image">
             <description>Background for Footer</description>
             <posx>0</posx>
-            <posy>600</posy>
+            <posy>550</posy>
             <width>1280</width>
-            <height>121</height>
+            <height>171</height>
             <texture border="0,0,0,0">gradient.png</texture>
-            <colordiffuse>82000000</colordiffuse>
+            <colordiffuse>A0000000</colordiffuse>
             <aspectratio>stretch</aspectratio>
         </control>
         <control type="label">
@@ -119,11 +104,31 @@
             <height>9</height>
             <aspectratio>keep</aspectratio>
         </control>
-        
+
+        <control type="image" id="30014">
+            <description>Background for Clock 24h</description>
+            <posx>50</posx>
+            <posy>400</posy>
+            <width>440</width>
+            <height>160</height>
+            <texture border="0,0,0,0"></texture>
+            <colordiffuse>30000000</colordiffuse>
+            <aspectratio>stretch</aspectratio>
+        </control>     
+        <control type="image" id="30015">
+            <description>Background for Clock</description>
+            <posx>50</posx>
+            <posy>400</posy>
+            <width>545</width>
+            <height>160</height>
+            <texture border="0,0,0,0"></texture>
+            <colordiffuse>30000000</colordiffuse>
+            <aspectratio>stretch</aspectratio>
+        </control> 
         <control type="image" id="30010">
              <description>Clock1</description>
              <posx>50</posx>
-             <posy>450</posy>
+             <posy>400</posy>
              <width>200</width>
              <height>150</height>
              <texture border="0,0,0,0"></texture>
@@ -132,7 +137,7 @@
         <control type="image" id="30012">
              <description>Points</description>
              <posx>250</posx>
-             <posy>450</posy>
+             <posy>400</posy>
              <width>30</width>
              <height>150</height>
              <texture border="0,0,0,0"></texture>
@@ -141,7 +146,7 @@
         <control type="image" id="30011">
              <description>Clock2</description>
              <posx>280</posx>
-             <posy>450</posy>
+             <posy>400</posy>
              <width>200</width>
              <height>150</height>
              <texture border="0,0,0,0"></texture>
@@ -150,7 +155,7 @@
         <control type="image" id="30013">
              <description>AMPM</description>
              <posx>485</posx>
-             <posy>514</posy>
+             <posy>464</posy>
              <width>100</width>
              <height>75</height>
              <texture border="0,0,0,0"></texture>
