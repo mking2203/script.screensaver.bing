@@ -1,7 +1,7 @@
 # Kodi Media Center language file
 # Addon Name: The Bing Screensaver
 # Addon id: script.screensaver.bing
-# Addon Provider: M. King
+# Addon Provider: Mark König
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -9,39 +9,39 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Kodi Translation Team\n"
-"Language-Team: German (http://www.transifex.com/projects/p/xbmc-addons/language/de/)\n"
+"Language-Team: English (http://www.transifex.com/projects/p/xbmc-addons/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #Settings
 
 msgctxt "#32110"
 msgid "Picture duration (seconds)"
-msgstr "Bilddauer (Sekunden)"
+msgstr ""
 
 msgctxt "#32111"
 msgid "Website (location)"
-msgstr "Website (Land)"
+msgstr ""
 
 msgctxt "#32112"
 msgid "Save all pictures"
-msgstr "Speichere alle Bilder"
+msgstr ""
 
 msgctxt "#32113"
 msgid "Delete cache"
-msgstr "Lösche Cache"
+msgstr ""
 
 msgctxt "#32114"
 msgid "Show clock"
-msgstr "Zeige Uhrzeit"
+msgstr ""
 
 msgctxt "#32115"
 msgid "Use 24h clock"
-msgstr "Benutze 24h Uhr"
+msgstr ""
 
 msgctxt "#32116"
 msgid "Show BING icon"
-msgstr "Zeige BING Logo"
+msgstr ""
