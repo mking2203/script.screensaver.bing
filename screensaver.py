@@ -278,7 +278,6 @@ class Screensaver(xbmcgui.WindowXMLDialog):
                     self.log(str(e))
 
     def getDir(self, path):
-        self.log('Path: ' + path)
         list = [s for s in os.listdir(path) if s.endswith('.jpg')]
         list.sort(reverse=True)
         return list
