@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.screensaver.bing" name="Bing Pictures Screensaver" version="0.4.1" provider-name="Mark König">
+<addon id="script.screensaver.bing" name="Bing Pictures Screensaver" version="0.4.2" provider-name="Mark König">
     <requires>
         <import addon="xbmc.python" version="2.14.0"/>
     </requires>
@@ -25,5 +25,24 @@
             <screenshot>resources/screenshot001.jpg</screenshot>
             <screenshot>resources/screenshot002.jpg</screenshot>
         </assets>
+		<news>
+[B]Version 0.4.2 - 10.10.2020[/B]
+- https
+- small adjustments[CR]
+[B]Version 0.4.1 - 23.01.2018[/B]
+- Bing logo can be disabled
+-add missing file
+-add shadow fot the clock[CR]
+[B]Version 0.4.0 - 21.01.2018[/B]
+- extendend mode works also offline[CR]
+[B]Version 0.3.1 - 12.06.2017[/B]
+- added screenshots[CR]
+[B]Version 0.3.0 - 07.06.2017[/B]
+ - fullscreen layout and new option clock[CR]
+[B]Version 0.2.0 - 01.04.2017[/B]
+ - extended version[CR]
+[B]Version 0.1.0 - 01.04.2017[/B]
+ - initial version[CR]
+		</news>
     </extension>
 </addon>
